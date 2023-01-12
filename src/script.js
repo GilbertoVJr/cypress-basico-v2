@@ -16,15 +16,15 @@ document.querySelector('#phone-checkbox')
     }
   })
 
-documen.querySelector('button[type="submit"]')
+document.querySelector('button[type="submit"]')
   .addEventListener('click', function(event) {
     event.preventDefault()
     const firstNameField = document.getElementById('firstName')
     const lastNameField = document.getElementById('lastName')
-    cons emailField = document.getElementById('email')
+    const emailField = document.getElementById('email')
     const textareaField = document.getElementById('open-text-area')
     const productField = document.getElementById('product')
-    cons helpRadio = document.querySelector('input[value="ajuda"]')
+    const helpRadio = document.querySelector('input[value="ajuda"]')
     const emailCheckbox = document.getElementById('email-checkbox')
     const phoneCheckbox = document.getElementById('phone-checkbox')
     const fileField = document.querySelector('input[type="file"]')
@@ -35,7 +35,7 @@ documen.querySelector('button[type="submit"]')
     if (isPhoneRequired && !phoneField.value) {
       return showAndHideErrorMessage()
     }
-    i (!emailField.value.match(/^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/)) {
+    if (!emailField.value.match(/^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/)) {
       return showAndHideErrorMessage()
     }
     firstNameField.value = ''
