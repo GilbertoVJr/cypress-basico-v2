@@ -2,6 +2,7 @@
 
 // Aula 1 e 2. Aprendendo cy.get(), cy.contains(), type(), clear() e .click()
 describe('Central de Atendimento ao Cliente TAT', function () {
+    const THREE_SECONDS_IN_MS = 3000
     beforeEach(function () {
         cy.visit('./src/index.html')
     })
@@ -14,6 +15,8 @@ describe('Central de Atendimento ao Cliente TAT', function () {
 
         const longText = 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. In finibus ultrices pretium. Integer pellentesque, ex vel finibus euismod, risus dolor placerat enim, sed varius velit massa sed tortor. Sed vestibulum, lectus eu rhoncus iaculis, ex mauris vehicula lacus, eleifend faucibus mauris nulla nec nulla. Mauris varius sollicitudin fermentum. Sed tincidunt odio eget vehicula suscipit.'
 
+        cy.clock()
+
         cy.get('#firstName').type('Gilberto')
         cy.get('#lastName').type('Vieira')
         cy.get('#email').type('gil@hotmail.com')
@@ -21,9 +24,15 @@ describe('Central de Atendimento ao Cliente TAT', function () {
         cy.contains('button', 'Enviar').click()
 
         cy.get('.success').should('be.visible')
+
+        cy.tick(THREE_SECONDS_IN_MS)
+
+        cy.get('.success').should('not.be.visible')
     })
 
     it('Exibir mensagem de erro ao submeter o formuário com um email com formatação inválida', function () {
+        cy.clock()
+
         cy.get('#firstName').type('Gilberto')
         cy.get('#lastName').type('Vieira')
         cy.get('#email').type('gil,hotmail@com')
@@ -31,6 +40,10 @@ describe('Central de Atendimento ao Cliente TAT', function () {
         cy.contains('button', 'Enviar').click()
 
         cy.get('.error').should('be.visible')
+
+        cy.tick(THREE_SECONDS_IN_MS)
+
+        cy.get('.success').should('not.be.visible')
     })
 
     it('Campo telefone continua vazio quando preenchido com valor não-numérico', function () {
@@ -40,6 +53,8 @@ describe('Central de Atendimento ao Cliente TAT', function () {
     })
 
     it('Exibir mensagem de erro quando o telefone se torna obrigatório mas não é preenchido antes do envio do formulário', function () {
+        cy.clock()
+
         cy.get('#firstName').type('Gilberto')
         cy.get('#lastName').type('Vieira')
         cy.get('#email').type('gil@hotmail.com')
@@ -48,6 +63,10 @@ describe('Central de Atendimento ao Cliente TAT', function () {
         cy.contains('button', 'Enviar').click()
 
         cy.get('.error').should('be.visible')
+
+        cy.tick(THREE_SECONDS_IN_MS)
+
+        cy.get('.error').should('not.be.visible')
     })
 
     it('Preencher e limpar os campos nome, sobrenome, email e telefone', function () {
@@ -74,15 +93,27 @@ describe('Central de Atendimento ao Cliente TAT', function () {
     })
 
     it('Exibir mensagem de erro ao submeter o formulário sem preencher os campos obrigatórios', function () {
+        cy.clock()
+
         cy.contains('button', 'Enviar').click()
 
         cy.get('.error').should('be.visible')
+
+        cy.tick(THREE_SECONDS_IN_MS)
+
+        cy.get('.error').should('not.be.visible')
     })
 
     it('Enviar o formulário com sucesso usando um comando customizado', function () {
+        cy.clock()
+
         cy.fillMandatoryFieldsAndSubmit()
 
         cy.get('.success').should('be.visible')
+
+        cy.tick(THREE_SECONDS_IN_MS)
+
+        cy.get('.success').should('not.be.visible')
     })
 
     //Aula 3, aprendendo comando Select
@@ -177,6 +208,9 @@ describe('Central de Atendimento ao Cliente TAT', function () {
 
     //Aula 8, Simulando viewport de um dispositivo móvel
     //Alterar no package.json
+
+    //Aula 11, utilizando o cy.clock e cy.tick
+
 
 })
 
