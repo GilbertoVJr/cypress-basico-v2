@@ -46,10 +46,12 @@ describe('Central de Atendimento ao Cliente TAT', function () {
         cy.get('.success').should('not.be.visible')
     })
 
-    it('Campo telefone continua vazio quando preenchido com valor não-numérico', function () {
-        cy.get('#phone')
-            .type('abcdefghij')
-            .should('have.value', '')
+    Cypress._.times(5, function (){
+        it('Campo telefone continua vazio quando preenchido com valor não-numérico', function () {
+            cy.get('#phone')
+                .type('abcdefghij')
+                .should('have.value', '')
+        })
     })
 
     it('Exibir mensagem de erro quando o telefone se torna obrigatório mas não é preenchido antes do envio do formulário', function () {
@@ -209,7 +211,7 @@ describe('Central de Atendimento ao Cliente TAT', function () {
     //Aula 8, Simulando viewport de um dispositivo móvel
     //Alterar no package.json
 
-    //Aula 11, utilizando o cy.clock e cy.tick
+    //Aula 11, utilizando o cy.clock e cy.tick; Utilizando o lodash para testar várias vezes seguidas
 
 
 })
