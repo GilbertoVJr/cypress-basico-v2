@@ -33,6 +33,6 @@ Or, run `npm run cy:open:mobile` to open Cypress in interactive mode on a mobile
 
 If you want to support this project, leave a ⭐.
 
-___
+__
 
 This project was created with 💚 by [Gilberto](https://github.com/GilbertoVJr).
