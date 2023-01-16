@@ -46,7 +46,7 @@ describe('Central de Atendimento ao Cliente TAT', function () {
         cy.get('.success').should('not.be.visible')
     })
 
-    Cypress._.times(5, function (){
+    Cypress._.times(5, function () {
         it('Campo telefone continua vazio quando preenchido com valor não-numérico', function () {
             cy.get('#phone')
                 .type('abcdefghij')
@@ -196,14 +196,14 @@ describe('Central de Atendimento ao Cliente TAT', function () {
 
     //Aula 7, como lidar com links de outras abas
 
-    it("Verificar que a política de privacidade abre em outra aba sem a necessidade de um clique", function() {
+    it("Verificar que a política de privacidade abre em outra aba sem a necessidade de um clique", function () {
         cy.get('#privacy a').should('have.attr', 'target', '_blank')
     })
 
-    it("Acessar a página da política de privacidade removendo o target e então clicar no link", function() {
+    it("Acessar a página da política de privacidade removendo o target e então clicar no link", function () {
         cy.get('#privacy a')
-          .invoke('removeAttr', 'target')
-          .click()
+            .invoke('removeAttr', 'target')
+            .click()
 
         cy.contains('Talking About Testing').should('be.visible')
     })
@@ -211,7 +211,24 @@ describe('Central de Atendimento ao Cliente TAT', function () {
     //Aula 8, Simulando viewport de um dispositivo móvel
     //Alterar no package.json
 
-    //Aula 11, utilizando o cy.clock e cy.tick; Utilizando o lodash para testar várias vezes seguidas
+    //Aula 11, utilizando o cy.clock e cy.tick; Utilizando o lodash para testar várias vezes seguidas; Utilizando invoke para mostrar e esconder elementos
+
+    it("Exibir e esconder as mensagens de sucesso e erro usando o .invoke()", function () {
+        cy.get('.success')
+            .should('not.be.visible')
+            .invoke('show')
+            .should('be.visible')
+            .and('contain', 'Mensagem enviada com sucesso.')
+            .invoke('hide')
+            .should('not.be.visible')
+        cy.get('.error')
+            .should('not.be.visible')
+            .invoke('show')
+            .should('be.visible')
+            .and('contain', 'Valide os campos obrigatórios!')
+            .invoke('hide')
+            .should('not.be.visible')
+    })
 
 
 })
